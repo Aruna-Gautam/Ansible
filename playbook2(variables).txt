@@ -1,0 +1,97 @@
+1- variables
+
+---
+- hosts: mhost1
+  gather_facts: False
+  vars:	
+	key: hello world!
+  tasks:
+	- name: Displaying variable
+	  debug:
+			msg: "{{ key }}"
+
+
+
+2- named dictionary variable 
+
+---
+- hosts: mhost1
+  gather_facts: False
+  vars:	
+	dict: 
+		key1: value1
+		key2: value2
+		
+  tasks:
+	- name: Displaying variable
+	  debug:
+			msg: "{{  dict['key2']  }}"
+
+
+
+
+3- named list variables
+
+---
+- hosts: mhost1
+  gather_facts: False
+  vars:	
+	list: 
+		- item1
+		- item2	
+		- item3
+		
+  tasks:
+	- name: Displaying variable
+	  debug:
+			msg: "{{  list[0]  }}"
+
+
+
+4- mixed variable (dictionary in list)
+
+---
+- hosts: mhost1
+  gather_facts: False
+  vars:	
+	users: 	
+		- name: john
+		  age: 25
+		- name: rach
+		- age: 31
+		
+  tasks:
+	- name: Displaying variable
+	  debug:
+			msg: "{{  users[0].name  }}"
+
+
+
+
+
+5- defined variable during playbook execution
+
+---
+- hosts: mhost1
+  gather_facts: False
+  vars_prompt:
+		- name: username
+		  prompt: Enter username
+		  private: no
+tasks:
+	- name: Create user
+	  user:
+		name: "{{ username }}"
+		state: prsent
+
+
+
+
+
+
+
+
+
+
+
+
